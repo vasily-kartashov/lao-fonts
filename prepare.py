@@ -49,30 +49,30 @@ with open(path.join(root_dir, 'example.txt'), 'r') as file:
 
 def prepare_specimen(family, styles):
     print('Specimen for %s' % family)
-    word = "ນ້ຳ ຟ້າ ສາສະໜາ ພາສາ ສະຫຼາມ ຊຳນານ ກະແລັມ ແວງ ຄຸກກີ້"
 
+    scale = 2
     files = []
     for style in styles:
         font = style['path']
-        txt = Image.new('RGBA', (220, 350), (255, 255, 255, 255))
+        txt = Image.new('RGBA', (220 * scale, 350 * scale), (255, 255, 255, 255))
         d = ImageDraw.Draw(txt)
-        d.rectangle([(0, 1600), (220, 350)], (255, 127, 42, 255))
+        d.rectangle([(0, 1600), (220 * scale, 350 * scale)], (255, 127, 42, 255))
 
-        fnt = ImageFont.truetype('Roboto-Regular', 10)
+        fnt = ImageFont.truetype('Roboto-Regular', 10 * scale)
         title = family + " (" + style['style'] + ")"
-        d.text((10, 8), title, font=fnt, fill=(0, 0, 0, 255))
+        d.text((10 * scale, 8 * scale), title, font=fnt, fill=(0, 0, 0, 255))
 
-        fnt = ImageFont.truetype(font, 170)
-        d.text((10,  35), lines[0], font=fnt, fill=(0, 125, 0, 255))
-        d.text((10,  65), lines[1], font=fnt, fill=(0, 0, 255, 255))
-        d.text((10,  95), lines[2], font=fnt, fill=(255, 0, 0, 255))
-        d.text((10, 125), lines[3], font=fnt, fill=(0, 0, 0, 255))
+        fnt = ImageFont.truetype(font, 17)
+        d.text((10 * scale,  35 * scale), lines[0], font=fnt, fill=(0, 125, 0, 255))
+        d.text((10 * scale,  65 * scale), lines[1], font=fnt, fill=(0, 0, 255, 255))
+        d.text((10 * scale,  95 * scale), lines[2], font=fnt, fill=(255, 0, 0, 255))
+        d.text((10 * scale, 125 * scale), lines[3], font=fnt, fill=(0, 0, 0, 255))
 
-        fnt = ImageFont.truetype(font, 12)
+        fnt = ImageFont.truetype(font, 12 * scale)
         offset = 0
         for line in lines[4:]:
-            d.text((10, 165 + offset), line, font=fnt, fill=(0, 0, 0, 255))
-            offset += 20
+            d.text((10 * scale, 165 * scale + offset), line, font=fnt, fill=(0, 0, 0, 255))
+            offset += 20 * scale
         output = path.join(spec_dir, family + '.png')
         try:
             txt.save(output)
