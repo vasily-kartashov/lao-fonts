@@ -50,7 +50,7 @@ with open(path.join(root_dir, 'example.txt'), 'r') as file:
 def prepare_specimen(family, styles):
     print('Specimen for %s' % family)
 
-    scale = 2
+    scale = 3
     files = []
     for style in styles:
         font = style['path']
@@ -62,7 +62,7 @@ def prepare_specimen(family, styles):
         title = family + " (" + style['style'] + ")"
         d.text((10 * scale, 8 * scale), title, font=fnt, fill=(0, 0, 0, 255))
 
-        fnt = ImageFont.truetype(font, 17)
+        fnt = ImageFont.truetype(font, 17 * scale)
         d.text((10 * scale,  35 * scale), lines[0], font=fnt, fill=(0, 125, 0, 255))
         d.text((10 * scale,  65 * scale), lines[1], font=fnt, fill=(0, 0, 255, 255))
         d.text((10 * scale,  95 * scale), lines[2], font=fnt, fill=(255, 0, 0, 255))
