@@ -54,25 +54,25 @@ def prepare_specimen(family, styles):
     files = []
     for style in styles:
         font = style['path']
-        txt = Image.new('RGBA', (2200, 3500), (255, 255, 255, 255))
+        txt = Image.new('RGBA', (220, 350), (255, 255, 255, 255))
         d = ImageDraw.Draw(txt)
-        d.rectangle([(0, 1600), (2200, 3500)], (255, 127, 42, 255))
+        d.rectangle([(0, 1600), (220, 350)], (255, 127, 42, 255))
 
-        fnt = ImageFont.truetype('Roboto-Regular', 100)
+        fnt = ImageFont.truetype('Roboto-Regular', 10)
         title = family + " (" + style['style'] + ")"
-        d.text((100, 80), title, font=fnt, fill=(0, 0, 0, 255))
+        d.text((10, 8), title, font=fnt, fill=(0, 0, 0, 255))
 
         fnt = ImageFont.truetype(font, 170)
-        d.text((100,  350), lines[0], font=fnt, fill=(0, 125, 0, 255))
-        d.text((100,  650), lines[1], font=fnt, fill=(0, 0, 255, 255))
-        d.text((100,  950), lines[2], font=fnt, fill=(255, 0, 0, 255))
-        d.text((100, 1250), lines[3], font=fnt, fill=(0, 0, 0, 255))
+        d.text((10,  35), lines[0], font=fnt, fill=(0, 125, 0, 255))
+        d.text((10,  65), lines[1], font=fnt, fill=(0, 0, 255, 255))
+        d.text((10,  95), lines[2], font=fnt, fill=(255, 0, 0, 255))
+        d.text((10, 125), lines[3], font=fnt, fill=(0, 0, 0, 255))
 
-        fnt = ImageFont.truetype(font, 120)
+        fnt = ImageFont.truetype(font, 12)
         offset = 0
         for line in lines[4:]:
-            d.text((100, 1650 + offset), line, font=fnt, fill=(0, 0, 0, 255))
-            offset += 200
+            d.text((10, 165 + offset), line, font=fnt, fill=(0, 0, 0, 255))
+            offset += 20
         output = path.join(spec_dir, family + '.png')
         try:
             txt.save(output)
@@ -88,6 +88,6 @@ if __name__ == '__main__':
     content += "All examples for http://laofonts.tripod.com/index.htm. Copyright unknown.\n\n"
     for family, styles in get_families().items():
         for file in prepare_specimen(family, styles):
-            content += '![' + file[0] + ']("' + file[1] + '" "' + file[0] + '")\n'
+            content += '![' + file[0] + '](' + file[1] + ' "' + file[0] + '")\n\n'
     with open('README.md', 'w') as file:
         file.write(content)
